@@ -20,7 +20,7 @@ and then:
 yarn dev
 ```
 For tests, run:
-
+```
 yarn dev-test
 ```
 
