@@ -26,27 +26,8 @@ const userSchema = new mongoose.Schema({
    role: {
       type: String,
       lowercase: true,
-      required: [true, 'Please provide a user role'],
+      required: [false, 'Please provide a user role'],
       enum: ['admin', 'provider', 'vendor', 'forwarder', 'client']
-   },
-
-   // relationships
-   vendors: [
-      {
-         type: mongoose.Schema.Types.ObjectId,
-         ref: "User",
-      },
-   ],
-
-   clients: [
-      {
-         type: mongoose.Schema.Types.ObjectId,
-         ref: "User",
-      },
-   ],
-   createdAt: {
-      type: Date,
-      default: Date.now,
    },
 },
    {

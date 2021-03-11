@@ -12,7 +12,7 @@ async function index(req, res) {
       res.status(statusCode).json(user);
 
    }
-   catch (error) { res.status(400).send(error); }
+   catch (error) { res.status(400).json(error.message); }
 }
 async function show(req, res) {
    const { id } = req.params
@@ -23,7 +23,7 @@ async function show(req, res) {
 
       res.status(statusCode).json(user)
    }
-   catch (error) { res.status(400).send(error); }
+   catch (error) { res.status(400).json(error.message); }
 }
 
 async function create(req, res) {
@@ -45,19 +45,15 @@ async function create(req, res) {
             user.vendors.push(vendor._id)
             await vendor.save();
             await user.save();
-
-
-
-
          } else {
             res.status(400).json({ message: 'Please provide a vendor id' })
          }
       } else {
          await user.save();
       }
-      res.status(201).send({ user });
+      res.status(201).json({ user });
    } catch (error) {
-      res.status(400).send(error);
+      res.status(400).json(error.message);
    }
 }
 
@@ -72,7 +68,7 @@ async function update(req, res) {
       const status = user ? 200 : 404;
       return res.status(status).json(user);
    }
-   catch (error) { res.status(400).send(error); }
+   catch (error) { res.status(400).json(error.message); }
 }
 
 async function deleteUser(req, res) {
@@ -84,7 +80,7 @@ async function deleteUser(req, res) {
 
       return res.status(statusCode).json(message);
    }
-   catch (error) { res.status(400).send(error); }
+   catch (error) { res.status(400).json(error.message); }
 }
 
 async function deleteAll(req, res) {
@@ -95,7 +91,7 @@ async function deleteAll(req, res) {
       const message = { message: 'Item deleted' }
       return res.status(200).json(message);
    }
-   catch (error) { res.status(400).send(error); }
+   catch (error) { res.status(400).json(error.message); }
 }
 
 export default {
