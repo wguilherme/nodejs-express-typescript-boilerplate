@@ -56,8 +56,6 @@ async function uploadToS3(fileBinary, path,filename){
       Body: fileBinary,
       ACL: 'public-read'
    }
-
-
    // s3.putObject(params, (err, data) => {
    //    if (err) return console.log(err);
    //    data.Url = `https://${process.env.DO_SPACES_NAME}.${process.env.DO_SPACES_ENDPOINT}/${path}${filename}`;         
