@@ -4,10 +4,7 @@ import Item from '../controllers/item/item'
 import multer from "multer"
 const upload = multer({ dest: "uploads/" })
 
-
 const router = express.Router();
-
-
 
 router.get("/item", Item.index);
 router.get("/item/:id", Item.show);
