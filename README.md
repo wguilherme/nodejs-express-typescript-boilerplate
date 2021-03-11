@@ -24,4 +24,4 @@ For tests, run:
 yarn dev-test
 ```
 
-Version: 0.0.2
+Version: 0.0.3
