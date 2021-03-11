@@ -7,25 +7,6 @@ import User from '../../models/User'
 import AWS from"aws-sdk"
 import fs from "fs"
 
-
-async function hello(req, res) {
-   try {
-      console.log('passed1')
-      const user = await User.find();
-      console.log('passed2')
-      const response = user ? user : 'Users not found';
-      console.log('passed3')
-      const statusCode = user ? 200 : 404;
-      console.log('passed4')
-      res.status(statusCode).send(response)
-   } catch (error) {
-      res.status(500).send(error)
-   }
-}
-
-function ping(req, res) {
-   res.status(200).json({ message: "pong" })
-}
 async function index(req, res) {
    try {
       const item = await Item.find();
@@ -34,9 +15,8 @@ async function index(req, res) {
    }
    catch (error) { res.status(400).send(error); }
 }
+
 async function show(req, res) {
-
-
    const { id } = req.params
 
    try {
@@ -45,6 +25,7 @@ async function show(req, res) {
    }
    catch (error) { res.status(400).send(error); }
 }
+
 async function create(req, res) {
    try {
       const item = new Item({
@@ -77,11 +58,11 @@ async function uploadToS3(fileBinary, path,filename){
    }
 
 
-   s3.putObject(params, (err, data) => {
-      if (err) return console.log(err);
-      data.Url = `https://${process.env.DO_SPACES_NAME}.${process.env.DO_SPACES_ENDPOINT}/${path}${filename}`;         
-      console.log("Your file has been uploaded successfully!", data);
-   });
+   // s3.putObject(params, (err, data) => {
+   //    if (err) return console.log(err);
+   //    data.Url = `https://${process.env.DO_SPACES_NAME}.${process.env.DO_SPACES_ENDPOINT}/${path}${filename}`;         
+   //    console.log("Your file has been uploaded successfully!", data);
+   // });
       
  
  
@@ -172,8 +153,6 @@ async function deleteAll(req, res) {
 
 
 export default {
-   hello,
-   ping,
    index,
    show,
    create,
