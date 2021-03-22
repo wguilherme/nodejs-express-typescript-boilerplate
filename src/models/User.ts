@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import validator from "validator";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import uniqueValidator from 'mongoose-unique-validator'
 
 const userSchema = new mongoose.Schema({
@@ -8,36 +10,74 @@ const userSchema = new mongoose.Schema({
       required: [true, 'Please provide your name'],
       trim: true,
    },
+   lastname: {
+      type: String,
+      // required: [true, 'Please provider your username'],
+   },
+   role: {
+      type: String,
+      enum: ['user', 'client', 'vendor', 'admin'],
+      required: [true, 'Please provider your userRole'],
+   },
    email: {
       type: String,
       unique: true,
       lowercase: true,
       required: [true, 'Please provide your email'],
-
       validate: [validator.isEmail, 'Please provide a valid email']
    },
    password: {
       type: String,
       required: true,
-      minLength: 3,
-      default: 123,
-   },
-
-   role: {
-      type: String,
-      lowercase: true,
-      required: [false, 'Please provide a user role'],
-      enum: ['admin', 'provider', 'vendor', 'forwarder', 'client']
+      minLength: 8,
+   }, 
+   tokens: {
+      type: Array
    },
 },
    {
       timestamps: true,
-      // strict: false
    },
-
 );
 
 userSchema.plugin(uniqueValidator);
+
+
+userSchema.pre("save", async function(next) {
+   // Hash the password before saving the user model
+   const user = this;
+   if (user.isModified("password")) {
+       user.password = await bcrypt.hash(user.password, 8);
+   }
+   next();
+});
+
+userSchema.methods.generateAuthToken = async function() {
+   // Generate an auth token for the user
+   const user = this;
+   const token = jwt.sign(
+       { _id: user._id },
+        process.env.JWT_KEY, 
+       //  {expiresIn: "1m"}
+       );
+
+   user.tokens = [];
+   user.tokens = user.tokens.concat({ token });
+
+   await user.save();
+   return token;
+};
+
+userSchema.statics.findByCredentials = async (email, password) => {
+
+   const user = await User.findOne({ email });
+   if (!user) return false
+   const isPasswordMatch = await bcrypt.compare(password, user.password);
+   if (!isPasswordMatch) return 'invalid-password'
+
+   return user;
+};
+
 
 const User = mongoose.model("User", userSchema);
 export default User;

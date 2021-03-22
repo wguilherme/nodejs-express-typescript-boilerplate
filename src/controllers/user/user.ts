@@ -35,22 +35,8 @@ async function create(req, res) {
          name, email, password, role
       });
 
-      if (role === 'client') {
+      await user.save();
 
-         const vendor = await User.findById(id);
-
-
-         if (vendor) {
-            vendor.clients.push(user)
-            user.vendors.push(vendor._id)
-            await vendor.save();
-            await user.save();
-         } else {
-            res.status(400).json({ message: 'Please provide a vendor id' })
-         }
-      } else {
-         await user.save();
-      }
       res.status(201).json({ user });
    } catch (error) {
       res.status(400).json(error.message);
@@ -63,7 +49,7 @@ async function update(req, res) {
       const user = await User.findByIdAndUpdate(
          id,
          { $set: req.body },
-         { upsert: true, new: true }
+         { upsert: false, new: true }
       );
       const status = user ? 200 : 404;
       return res.status(status).json(user);
