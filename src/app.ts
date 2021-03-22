@@ -3,9 +3,9 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 
 //routes
-import itemRouter from './routes/item'
-import userRouter from './routes/user'
-import generalRouter from './routes/general'
+import itemRouter from './routes/item/item'
+import userRouter from './routes/user/user'
+import generalRouter from './routes/general/general'
 
 dotenv.config();
 

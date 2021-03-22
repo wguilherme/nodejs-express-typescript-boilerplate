@@ -1,5 +1,5 @@
 import express from "express";
-import Item from '../controllers/item/item'
+import Item from '../../controllers/item/item'
 
 import multer from "multer"
 const upload = multer({ dest: "uploads/" })

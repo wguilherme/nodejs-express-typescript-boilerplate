@@ -9,7 +9,8 @@
     "start": "node dist/server.js",
     "test": "jest",
     "dev-test": "jest --watch",
-    "postinstall": "yarn build"
+    "postinstall": "yarn build",
+    "mongo-docker": "sudo docker run -p 27017:27017 -v ${PWD}/localdb/mongo:/data/db mongo"
   },
   "dependencies": {
     "@shelf/jest-mongodb": "^1.2.3",
