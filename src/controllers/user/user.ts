@@ -1,10 +1,6 @@
 
 import User from '../../models/User'
 
-interface IUser {
-   [key: string]: any // trick for remove all ts errors
-}
-
 async function index(req, res) {
    try {
       const user = await User.find();
@@ -28,16 +24,17 @@ async function show(req, res) {
 
 async function create(req, res) {
 
-   const { id, name, email, password, role } = req.body;
+   const { name, email, password, role } = req.body;
 
    try {
-      const user: IUser = new User({
+      const user: any = new User({
          name, email, password, role
       });
 
+      await user.generateAuthToken();
       await user.save();
 
-      res.status(201).json({ user });
+      res.status(201).json(user);
    } catch (error) {
       res.status(400).json(error.message);
    }
