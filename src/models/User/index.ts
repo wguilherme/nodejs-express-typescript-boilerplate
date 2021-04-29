@@ -4,6 +4,10 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import uniqueValidator from 'mongoose-unique-validator'
 
+
+// export interface 
+
+
 const userSchema = new mongoose.Schema({
    name: {
       type: String,
@@ -30,7 +34,7 @@ const userSchema = new mongoose.Schema({
       type: String,
       required: true,
       minLength: 8,
-   }, 
+   },
    tokens: {
       type: Array
    },
@@ -39,27 +43,26 @@ const userSchema = new mongoose.Schema({
       timestamps: true,
    },
 );
-
 userSchema.plugin(uniqueValidator);
 
 
-userSchema.pre("save", async function(next) {
+userSchema.pre("save", async function (next) {
    // Hash the password before saving the user model
-   const user = this;
+   const user: any = this;
    if (user.isModified("password")) {
-       user.password = await bcrypt.hash(user.password, 8);
+      user.password = await bcrypt.hash(user.password, 8);
    }
    next();
 });
 
-userSchema.methods.generateAuthToken = async function() {
+userSchema.methods.generateAuthToken = async function () {
    // Generate an auth token for the user
-   const user = this;
+   const user: any = this;
    const token = jwt.sign(
-       { _id: user._id },
-        process.env.JWT_KEY, 
-       //  {expiresIn: "1m"}
-       );
+      { _id: user._id },
+      process.env.JWT_KEY,
+      //  {expiresIn: "1m"}
+   );
 
    user.tokens = [];
    user.tokens = user.tokens.concat({ token });
@@ -70,7 +73,7 @@ userSchema.methods.generateAuthToken = async function() {
 
 userSchema.statics.findByCredentials = async (email, password) => {
 
-   const user = await User.findOne({ email });
+   const user: any = await User.findOne({ email });
    if (!user) return false
    const isPasswordMatch = await bcrypt.compare(password, user.password);
    if (!isPasswordMatch) return 'invalid-password'

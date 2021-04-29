@@ -1,5 +1,5 @@
 import request from 'supertest'
-import Item from './../../models/Item'
+import Item from '../../models/Item'
 import mongoose from 'mongoose'
 import app from '../../app'
 const { setupDB } = require('./test-setupMemory')
