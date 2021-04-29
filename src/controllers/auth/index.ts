@@ -1,53 +1,65 @@
 
 import User from '../../models/User'
 
-async function login(req, res) {
 
-    try {
-        const { email, password } = req.body;
-        const user: any = await User.findByCredentials(email, password);
+const authController = {
 
-        if (!user) {
-            return res.status(400).json({ message: "User not found" });
+    async login(req, res) {
+
+        console.log('entered')
+
+        try {
+            console.log(req.body)
+            const { email, password } = req.body;
+            const user: any = await User.findByCredentials(email, password);
+
+            console.log('pass2')
+
+            if (!user) {
+                return res.status(400).json({ message: "User not found" });
+            }
+            if (user == "invalid-password") {
+                console.log('pass3')
+                return res.status(400).json({ message: "Invalid password" });
+            }
+            console.log('pass4')
+            if (user) await user.generateAuthToken();
+            console.log(user)
+            console.log('pass5')
+
+            res.status(200).json({ user: user });
+
+
+
+        } catch (error) {
+            res.status(400).json(error.message)
         }
-        if (user == "invalid-password") {
-            return res.status(400).json({ message: "Invalid password" });
+
+
+    },
+
+    async logout(req, res) {
+        try {
+            req.user.tokens = req.user.tokens.filter(token => {
+                return token.token != req.token;
+            });
+            await req.user.save();
+            console.log('deslogado')
+            res.status(200).json({ message: "User disconnected" });
+        } catch (error) {
+            console.log('catch')
+            res.status(500).json(error.message);
         }
-        if (user) await user.generateAuthToken();
-        console.log(user)
+    },
 
-        res.status(200).json({ user: user });
-
-
-
-    } catch (error) {
-        res.status(400).json(error.message)
-    }
-
-
-}
-
-async function logout(req, res) {
-    try {
-        req.user.tokens = req.user.tokens.filter(token => {
-            return token.token != req.token;
-        });
-        await req.user.save();
-        console.log('deslogado')
-        res.status(200).json({ message: "User disconnected" });
-    } catch (error) {
-        console.log('catch')
-        res.status(500).json(error.message);
+    async logoutAll(req, res) {
+        try {
+            req.user.tokens.splice(0, req.user.tokens.length);
+            await req.user.save();
+            res.status(200).json({ message: "User disconnected on all devices" });
+        } catch (error) {
+            res.status(500).json(error.message);
+        }
     }
 }
-
-async function logoutAll(req, res) {
-    try {
-        req.user.tokens.splice(0, req.user.tokens.length);
-        await req.user.save();
-        res.status(200).json({ message: "User disconnected on all devices" });
-    } catch (error) {
-        res.status(500).json(error.message);
-    }
-}
-export default { login, logout, logoutAll }
+export default authController
