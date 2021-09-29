@@ -9,7 +9,7 @@ import User from "../../models/User"
 const adminJsOptions = {
    resources: [User],
    databases: [],
-   rootPath: '/',
+   rootPath: '/admin',
    branding: {
       companyName: 'Admin Panel',
       softwareBrothers: false,
