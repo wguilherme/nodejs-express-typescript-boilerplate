@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
+    "dev": "ts-node-dev --respawn --clear --transpile-only --ignore-watch node_modules src/server.ts",
+    "dev-debug": "ts-node-dev --debug --respawn --transpile-only --ignore-watch node_modules src/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "start": "node dist/server.js",
     "test": "jest",
@@ -13,18 +14,15 @@
     "mongo-docker": "sudo docker run -p 27017:27017 -v ${PWD}/localdb/mongo:/data/db mongo"
   },
   "dependencies": {
-    "@shelf/jest-mongodb": "^1.2.3",
     "@types/mongoose": "^5.10.3",
     "@types/mongoose-unique-validator": "^1.0.4",
     "@types/morgan": "^1.9.2",
     "@types/validator": "^13.1.2",
-    "@typescript-eslint/eslint-plugin": "^4.11.1",
     "aws-sdk": "^2.828.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "csv-parser": "^3.0.0",
     "dotenv": "^8.2.0",
-    "eslint-config-airbnb-base": "^14.2.1",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
@@ -35,6 +33,9 @@
     "validator": "^13.6.0"
   },
   "devDependencies": {
+    "@shelf/jest-mongodb": "^1.2.3",
+    "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "eslint-config-airbnb-base": "^14.2.1",
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
     "@babel/node": "^7.12.10",
