@@ -10,6 +10,7 @@
     "start": "node dist/server.js",
     "test": "jest",
     "dev-test": "jest --watch",
+    "lint": "yarn run eslint",
     "postinstall": "yarn build",
     "mongo-docker": "sudo docker run -p 27017:27017 -v ${PWD}/localdb/mongo:/data/db mongo"
   },
@@ -28,6 +29,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-formidable": "^1.2.0",
+    "express-rate-limit": "^5.3.0",
     "express-session": "^1.17.2",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
@@ -35,7 +37,8 @@
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
-    "validator": "^13.6.0"
+    "validator": "^13.6.0",
+    "xss": "^1.0.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
