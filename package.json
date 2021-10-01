@@ -3,14 +3,17 @@
   "version": "1.0.02",
   "main": "index.js",
   "license": "MIT",
+  "private": true,
   "scripts": {
+    "lint": "yarn eslint src/*.js",
+    "postinstall": "husky install",
+    "prepare": "husky install",
     "dev": "ts-node-dev --respawn --clear --transpile-only --ignore-watch node_modules src/server.ts",
     "dev-debug": "ts-node-dev --debug --respawn --transpile-only --ignore-watch node_modules src/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
     "start": "node dist/server.js",
     "test": "jest",
     "dev-test": "jest --watch",
-    "lint": "yarn run eslint",
     "postinstall": "yarn build",
     "mongo-docker": "sudo docker run -p 27017:27017 -v ${PWD}/localdb/mongo:/data/db mongo"
   },
@@ -57,12 +60,13 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^14.2.1",
+    "husky": "^7.0.2",
     "jest": "^26.6.3",
     "mongodb-memory-server": "^6.9.2",
     "supertest": "^6.0.1",
     "ts-jest": "^26.4.4",
     "ts-node-dev": "^1.1.1",
-    "typescript": "^4.1.3"
+    "typescript": "^4.4.3"
   },
   "jest": {
     "testEnvironment": "node"
