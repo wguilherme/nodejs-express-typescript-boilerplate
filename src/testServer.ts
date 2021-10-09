@@ -1,4 +1,4 @@
-import setupMongoMemory from '@config/testSetup/setupMongoMemoryTest';
+import setupMongoMemory from './config/testSetup/setupMongoMemoryTest'
 // import app from './app'
 
 // dotenv.config();
@@ -9,7 +9,7 @@ import setupMongoMemory from '@config/testSetup/setupMongoMemoryTest';
 // import connectToMongoMemory from "./config/database/mongoMemory"
 // connectToMongoMemory.connect()
 
-setupMongoMemory();
+setupMongoMemory()
 
 // const PORT = process.env.PORT || 3050;
 // app.listen(PORT, () => {

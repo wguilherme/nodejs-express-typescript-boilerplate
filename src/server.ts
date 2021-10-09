@@ -1,11 +1,11 @@
-import connectToMongo from './config/database/mongo';
-import app from './app';
+import connectToMongo from './config/database/mongo'
+import app from './app'
 
 // dotenv.config();
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 80
 
-connectToMongo();
+connectToMongo()
 
 app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}`);
-});
+  console.log(`Listening on port ${PORT}`)
+})
