@@ -29,6 +29,7 @@ app.use(express.json())
 app.use(cors());
 app.use(helmet());
 app.use(morgan('tiny'));
+
 // applying into all requests
 app.use(limiter);
 
