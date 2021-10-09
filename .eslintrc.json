@@ -29,6 +29,14 @@
     }
   },
   "rules": {
+    "semi": [
+      2,
+      "always"
+    ],
+    "semi": [
+      "error",
+      "never"
+    ],
     "no-underscore-dangle": "off",
     "import/extensions": [
       "error",

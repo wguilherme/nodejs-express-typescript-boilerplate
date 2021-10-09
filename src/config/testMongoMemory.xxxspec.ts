@@ -1,13 +1,12 @@
 import request from 'supertest'
-import Item from '../models/Item'
 import mongoose from 'mongoose'
+import Item from '../models/Item'
 import app from '../app'
 // const { setupDB } = require('./test-setupMemory')
 
 // setupDB();
 
-import connectToMongoMemory from "./database/mongoMemory"
-
+import connectToMongoMemory from './database/mongoMemory'
 
 // it('Should save item in mongo-memory-server', async done => {
 //   const res = await request(app).post('/item')
@@ -22,4 +21,3 @@ import connectToMongoMemory from "./database/mongoMemory"
 //   expect(item.title).toBeTruthy()
 //   //  done()
 // })
-
