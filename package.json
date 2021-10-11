@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "lint": "yarn eslint src/*.ts",
+    "lint-fix": "yarn eslint --fix src/**/*.ts",
     "postinstall": "yarn build",
     "prepare": "husky install",
     "dev": "ts-node-dev --respawn --clear --transpile-only --ignore-watch node_modules src/server.ts",
