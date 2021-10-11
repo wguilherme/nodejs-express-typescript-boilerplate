@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 const connectToMongo = async () => {
   try {
@@ -7,12 +7,12 @@ const connectToMongo = async () => {
       useCreateIndex: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
-    });
+    })
 
-    console.log('Database connected!');
+    console.log('Database connected!')
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
-};
+}
 
-export default connectToMongo;
+export default connectToMongo

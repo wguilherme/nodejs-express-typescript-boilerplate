@@ -1,4 +1,4 @@
-// const getParams = { 
+// const getParams = {
    //    Bucket: "healthy",
    //    Key: `temp/sellynx/`,
    // }
@@ -38,7 +38,7 @@
 //               'Content-Type': 'image/png',
 //               'Content-Length': img.length
 //             });
-          
+
 //             res.end(img);
 //       }
 //   });

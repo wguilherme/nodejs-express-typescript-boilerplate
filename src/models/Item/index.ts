@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const indexSchema = new mongoose.Schema({
-    title: String,
-    description: String,
-});
+  title: String,
+  description: String,
+})
 
-const Item = mongoose.model("Item", indexSchema);
-export default Item;
+const Item = mongoose.model('Item', indexSchema)
+export default Item

@@ -1,9 +1,9 @@
-
 import express from 'express'
+import General from '../../controllers/general'
+
 const router = express.Router()
-import General from "../../controllers/general"
 
-router.get("/", General.index)
-router.get("/ping", General.ping);
+router.get('/', General.index)
+router.get('/ping', General.ping)
 
-export default router;
+export default router
