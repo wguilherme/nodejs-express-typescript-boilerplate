@@ -10,16 +10,10 @@ const auth = async (req, res, next) => {
       return false
     }
 
-    const data = jwt.verify(token, process.env.JWT_KEY)
+    const data: any = jwt.verify(token, process.env.JWT_KEY)
+    const user = await User.findOne({ _id: data._id, token })
+    if (!user) throw new Error()
 
-    const user = await User.findOne({
-      _id: data._id,
-      'tokens.token': token,
-    })
-
-    if (!user) {
-      throw new Error()
-    }
     req.user = user
     req.token = token
     next()

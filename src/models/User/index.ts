@@ -34,9 +34,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     minLength: 8,
   },
-  tokens: {
-    type: Array,
-  },
+  token: String,
+  // tokens: {
+  //   type: Array,
+  // },
 },
   {
     timestamps: true,
@@ -52,9 +53,6 @@ userSchema.pre('save', async function (next) {
   next()
 })
 
-const User: any = mongoose.model('User', userSchema)
-export default User
-
 userSchema.methods.generateAuthToken = async function () {
   // Generate an auth token for the user
   const user: any = this
@@ -64,14 +62,16 @@ userSchema.methods.generateAuthToken = async function () {
     //  {expiresIn: "1m"}
   )
 
-  user.tokens = []
-  user.tokens = user.tokens.concat({ token })
+  // user.tokens = []
+  // user.tokens = user.tokens.concat({ token })
+  user.token = token
 
   await user.save()
   return token
 }
 
 userSchema.statics.findByCredentials = async (email, password) => {
+  // eslint-disable-next-line no-use-before-define
   const user: any = await User.findOne({ email })
   if (!user) return false
   const isPasswordMatch = await bcrypt.compare(password, user.password)
@@ -79,3 +79,6 @@ userSchema.statics.findByCredentials = async (email, password) => {
 
   return user
 }
+
+const User: any = mongoose.model('User', userSchema)
+export default User

@@ -44,6 +44,16 @@ const authController = {
     }
   },
 
+  async loggedUser(req, res) {
+    try {
+      console.log(req.user)
+      const user: any = await User.findById(req.user._id)
+      res.status(200).json(user)
+    } catch (error) {
+      res.status(400).json(error)
+    }
+  },
+
   async logoutAll(req, res) {
     try {
       req.user.tokens.splice(0, req.user.tokens.length)
