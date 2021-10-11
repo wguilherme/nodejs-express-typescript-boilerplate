@@ -1,6 +1,6 @@
 // test-setup.js
 // import mongoMemoryHandler from '../../database/mongoMemory';
-import mongoMemoryHandler from '../database/mongoMemory';
+import mongoMemoryHandler from '../database/mongoMemory'
 
 // mongoose.set('useCreateIndex', true)
 // mongoose.promise = global.Promise
@@ -31,13 +31,13 @@ import mongoMemoryHandler from '../database/mongoMemory';
 // }
 
 const setupMongoMemory = () => {
-  beforeAll(async () => mongoMemoryHandler.connect());
+  beforeAll(async () => mongoMemoryHandler.connect())
   // afterEach(async () => await mongoMemoryHandler.clearDatabase());
   // Cleans up database between each test
   // afterEach(async () => {
   //   await removeAllCollections()
   // })
-  afterAll(async () => mongoMemoryHandler.closeDatabase());
-};
+  afterAll(async () => mongoMemoryHandler.closeDatabase())
+}
 
-export default setupMongoMemory;
+export default setupMongoMemory

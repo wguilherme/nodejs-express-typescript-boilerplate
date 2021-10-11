@@ -2,10 +2,10 @@
  * For a detailed explanation regarding each configuration property and type check, visit:
  * https://jestjs.io/docs/en/configuration.html
  */
-import { pathsToModuleNameMapper } from 'ts-jest/utils';
-import { compilerOptions } from './tsconfig.json';
+import { pathsToModuleNameMapper } from 'ts-jest/utils'
+import { compilerOptions } from './tsconfig.json'
 
-const { defaults: tsjPreset } = require('ts-jest/presets');
+const { defaults: tsjPreset } = require('ts-jest/presets')
 
 export default {
   clearMocks: true,
@@ -15,4 +15,4 @@ export default {
   testEnvironment: 'node',
   // globalSetup: "<rootDir>/scripts/testSetup.js",
   // setupFilesAfterEnv: ['./jest.setup.js']
-};
+}
