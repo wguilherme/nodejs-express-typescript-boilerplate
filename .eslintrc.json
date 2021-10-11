@@ -30,10 +30,10 @@
     }
   },
   "rules": {
-    "semi": [
-      2,
-      "always"
-    ],
+    // "semi": [
+    //   2,
+    //   "always"
+    // ],
     "semi": [
       "error",
       "never"

@@ -16,9 +16,9 @@ export default async function uploadToS3(fileBinary, path, filename) {
     Body: fileBinary,
     ACL: 'public-read',
   }
-
+  /* eslint no-param-reassign: ["error", { "props": false }] */
   return new Promise((resolve, reject) => {
-    s3.putObject(params, (err, data) => {
+    s3.putObject(params, (err: any, data: any) => {
       if (err) {
         reject(err)
       }
