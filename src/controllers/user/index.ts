@@ -48,7 +48,7 @@ const userController = {
         { upsert: false, new: true },
       )
       const status = user ? 200 : 404
-      return res.status(status).json(user)
+      res.status(status).json(user)
     } catch (error) { res.status(400).json(error.message) }
   },
 
@@ -59,7 +59,7 @@ const userController = {
       const statusCode = user ? 200 : 404
       const message = user ? { message: 'User deleted' } : { message: 'User not found' }
 
-      return res.status(statusCode).json(message)
+      res.status(statusCode).json(message)
     } catch (error) { res.status(400).json(error.message) }
   },
 
@@ -67,7 +67,7 @@ const userController = {
     try {
       const user = await User.deleteMany()
       const message = { message: 'Item deleted' }
-      return res.status(200).json(message)
+      res.status(200).json(message)
     } catch (error) { res.status(400).json(error.message) }
   },
 

@@ -2,9 +2,9 @@ import request from 'supertest'
 import app from '../../app'
 import User from '../../models/User'
 
-const { setupDB } = require('../config/test-setup')
+// const { setupDB } = require('../config/test-setup')
 
-setupDB('jest-sellynx')
+// setupDB('jest-sellynx')
 
 describe('Test index user', () => {
   it('Should create user', async (done) => {
@@ -15,7 +15,7 @@ describe('Test index user', () => {
         password: 123,
         role: 'admin',
       })
-      // Searches the user in the database
+    // Searches the user in the database
 
     expect(res.status).toEqual(201)
     // expect(user).toBeTruthy()

@@ -34,6 +34,10 @@
     //   2,
     //   "always"
     // ],
+    "eqeqeq": [
+      "warn"
+      // "smart"
+    ],
     "semi": [
       "error",
       "never"
