@@ -21,16 +21,11 @@ const userController = {
   },
 
   async create(req, res) {
-    const {
-      name, email, password, role,
-    } = req.body
-
     try {
-      const user: any = new User({
-        name, email, password, role,
-      })
+      const user: any = new User(req.body)
 
       await user.generateAuthToken()
+      console.log('pass1')
       await user.save()
 
       res.status(201).json(user)

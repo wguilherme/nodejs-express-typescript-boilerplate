@@ -76,11 +76,11 @@ userSchema.methods.generateAuthToken = async function () {
     },
   )
 
-  const refreshToken = jwt.sign(
-    user,
-    config.refreshTokenSecret,
-    { expiresIn: config.refreshTokenLife },
-  )
+  // const refreshToken = jwt.sign(
+  //   user,
+  //   config.refreshTokenSecret,
+  //   { expiresIn: config.refreshTokenLife },
+  // )
 
   // user.tokens = []
   // user.tokens = user.tokens.concat({ token })
