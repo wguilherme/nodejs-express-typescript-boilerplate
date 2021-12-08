@@ -26,7 +26,7 @@ const authController = {
       console.log(user)
       console.log('pass5')
 
-      res.status(200).json({ user })
+      res.status(200).json(user)
     } catch (error) {
       res.status(400).json(error.message)
     }
@@ -45,8 +45,9 @@ const authController = {
   },
 
   async loggedUser(req, res) {
+    console.log('get user')
+    console.log(req.user)
     try {
-      console.log(req.user)
       const user: any = await User.findById(req.user._id)
       res.status(200).json(user)
     } catch (error) {

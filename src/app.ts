@@ -5,6 +5,9 @@ import helmet from 'helmet'
 import rateLimit from 'express-rate-limit'
 import dotenv from 'dotenv'
 
+import swaggerUi from 'swagger-ui-express'
+import swaggerJsDoc from 'swagger-jsdoc'
+import swaggerDocument from './config/swagger/swagger.json'
 import routes from './router'
 
 // import { adminJs, adminJsRouter } from "./config/adminjs"
@@ -27,6 +30,36 @@ app.use(express.json())
 app.use(cors())
 app.use(helmet())
 app.use(morgan('tiny'))
+
+const swaggerJsDocOptions = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Brainy A15 - API Boilerplate',
+      version: '0.0.1',
+      description:
+        'This is a REST API application made with Express. It retrieves data from mongo database (local or cloud).',
+      license: {
+        name: 'Licensed Under MIT',
+        url: 'https://spdx.org/licenses/MIT.html',
+      },
+      contact: {
+        name: 'Brainy (W.Guilherme)',
+        url: 'https://brainyresults.com',
+      },
+    },
+
+  },
+  apis: ['./src/routes/**/**.ts'], // files containing annotations as above
+}
+
+const swaggerOptions = {
+  // explorer: true,
+}
+
+const swaggerDocs = swaggerJsDoc(swaggerJsDocOptions)
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, swaggerOptions))
 
 // applying into all requests
 app.use(limiter)
