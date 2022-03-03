@@ -1,4 +1,3 @@
-// assuming mongoose@6.x
 import mongoose from 'mongoose'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 
@@ -21,11 +20,7 @@ const mongoMemoryHandler = {
     }
   },
   async disconnect() {
-    try {
-      await mongoose.disconnect()
-    } catch (error: any) {
-      console.log('error on disconnect', error.message)
-    }
+    try { await mongoose.disconnect() } catch (error: any) { console.log('error on disconnect', error.message) }
   },
 }
 export default mongoMemoryHandler
