@@ -24,7 +24,7 @@ const itemController = {
         description: req.body.description,
       })
       await item.save()
-      res.status(201).json(item)
+      res.status(200).json(item)
     } catch (error) {
       res.status(400).json(error)
     }

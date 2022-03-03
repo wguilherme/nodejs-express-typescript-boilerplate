@@ -5,9 +5,10 @@ const userController = {
   async index(req, res) {
     try {
       const user = await User.find()
-      const statusCode = user ? 200 : 404
-      res.status(statusCode).json(user)
-    } catch (error) { res.status(400).json(error.message) }
+      res.status(200).json(user)
+    } catch (error) {
+      res.status(400).json({ status: 'error', message: error.message })
+    }
   },
   async show(req, res) {
     const { id } = req.params
@@ -17,20 +18,19 @@ const userController = {
       const statusCode = user ? 200 : 400
 
       res.status(statusCode).json(user)
-    } catch (error) { res.status(400).json(error.message) }
+    } catch (error) {
+      res.status(400).json({ status: 'error', message: error.message })
+    }
   },
 
   async create(req, res) {
     try {
-      const user: any = new User(req.body)
-
+      const user: any = await User.create(req.body)
       await user.generateAuthToken()
-      console.log('pass1')
-      await user.save()
 
-      res.status(201).json(user)
+      res.status(200).json({ status: 'success', message: 'User created', user })
     } catch (error) {
-      res.status(400).json(error.message)
+      res.status(400).json({ status: 'error', message: error.message })
     }
   },
 
@@ -44,7 +44,9 @@ const userController = {
       )
       const status = user ? 200 : 404
       res.status(status).json(user)
-    } catch (error) { res.status(400).json(error.message) }
+    } catch (error) {
+      res.status(400).json({ status: 'error', message: error.message })
+    }
   },
 
   async deleteUser(req, res) {
@@ -55,7 +57,9 @@ const userController = {
       const message = user ? { message: 'User deleted' } : { message: 'User not found' }
 
       res.status(statusCode).json(message)
-    } catch (error) { res.status(400).json(error.message) }
+    } catch (error) {
+      res.status(400).json({ status: 'error', message: error.message })
+    }
   },
 
   async deleteAll(req, res) {
@@ -63,7 +67,9 @@ const userController = {
       const user = await User.deleteMany()
       const message = { message: 'Item deleted' }
       res.status(200).json(message)
-    } catch (error) { res.status(400).json(error.message) }
+    } catch (error) {
+      res.status(400).json({ status: 'error', message: error.message })
+    }
   },
 
 }

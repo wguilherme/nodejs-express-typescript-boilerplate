@@ -13,9 +13,15 @@ const api = request(app)
 
 describe('user register and authentication', () => {
   it('should register a new user', async () => {
-    console.log('users', users)
     const registerUser = await api.post('/user').send(users[0])
     expect(registerUser.status).toEqual(200)
-    console.log('registerUser', registerUser.body)
+  })
+  it('should list all users', async () => {
+    const listUsers = await api.get('/user')
+    expect(listUsers.status).toEqual(200)
+    // users[0].id = listUsers.body[0]._id
+  })
+  it('should show user with correct data', async () => {
+
   })
 })
