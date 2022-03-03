@@ -18,4 +18,9 @@ router.get('/', General.index)
  */
 router.get('/ping', General.ping)
 
+// dev only routes
+if (process.env.DEV === 'true') {
+  router.post('/dev/reset/db/mongo', General.resetMongoDb)
+}
+
 export default router

@@ -11,17 +11,4 @@ describe('Test my app server', () => {
     expect(res.status).toEqual(200)
     expect(res.body.message).toEqual('pong')
   })
-
-  it('Should save item in database', async () => {
-    const item = {
-      title: 'Item title 01',
-      description: 'Item description',
-    }
-
-    const createdItem: any = await request(app).post('/item').send(item)
-    expect(createdItem.status).toEqual(201)
-
-    const foundItem: any = await Item.findOne({ title: item.title })
-    expect(foundItem?.title).toEqual(item.title)
-  })
 })

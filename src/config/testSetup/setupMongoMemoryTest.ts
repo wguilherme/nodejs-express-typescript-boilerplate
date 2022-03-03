@@ -32,10 +32,10 @@ import mongoMemoryHandler from '../database/mongoMemory'
 
 const setupMongoMemory = () => {
   beforeAll(async () => mongoMemoryHandler.connect())
-  // afterEach(async () => await mongoMemoryHandler.clearDatabase());
+  // afterEach(async () => mongoMemoryHandler.clearDatabase())
   // Cleans up database between each test
   // afterEach(async () => {
-  //   await removeAllCollections()
+  //   await mongoMemoryHandler.removeAllCollections()
   // })
   afterAll(async () => mongoMemoryHandler.closeDatabase())
 }
