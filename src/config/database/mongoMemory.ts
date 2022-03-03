@@ -6,6 +6,8 @@ const mongooseOptions: any = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   connectTimeoutMS: 50000,
+  autoReconnect: true,
+  reconnectTries: 3,
 }
 
 const mongoMemoryHandler = {
