@@ -3,7 +3,6 @@ import mongoose from 'mongoose'
 import validator from 'validator'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-import uniqueValidator from 'mongoose-unique-validator'
 
 // export interface
 
@@ -42,7 +41,7 @@ const userSchema = new mongoose.Schema({
   {
     timestamps: true,
   })
-userSchema.plugin(uniqueValidator)
+// userSchema.plugin(uniqueValidator)
 
 userSchema.pre('save', async function (next) {
   // Hash the password before saving the user model

@@ -1,9 +1,6 @@
 import request from 'supertest'
-import Item from '../../models/Item'
-import setupMongoMemory from '../../config/testSetup/setupMongoMemoryTest'
-import app from '../../app'
-
-setupMongoMemory()
+import Item from '../models/Item'
+import app from '../app'
 
 describe('Test my app server', () => {
   const itemData = {

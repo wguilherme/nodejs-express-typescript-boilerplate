@@ -1,10 +1,9 @@
 import request from 'supertest'
-import app from '../../app'
-import User from '../../models/User'
+import User from '../models/User'
+import app from '../app'
+import setupMongoMemory from '../config/testSetup/setupMongoMemoryTest'
 
-// const { setupDB } = require('../config/test-setup')
-
-// setupDB('jest-sellynx')
+setupMongoMemory()
 
 describe('Test index user', () => {
   it('Should create user', async (done) => {

@@ -1,10 +1,6 @@
 import request from 'supertest'
-import User from '../../models/User'
-import app from '../../app'
-
-// const { setupDB } = require('../config/test-setupMemory')
-
-// setupDB()
+import User from '../models/User'
+import app from '../app'
 
 const body: any = {
   name: 'John',

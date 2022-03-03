@@ -22,6 +22,6 @@ describe('Test my app server', () => {
     expect(createdItem.status).toEqual(201)
 
     const foundItem: any = await Item.findOne({ title: item.title })
-    expect(foundItem.title).toEqual(item.title)
+    expect(foundItem?.title).toEqual(item.title)
   })
 })
