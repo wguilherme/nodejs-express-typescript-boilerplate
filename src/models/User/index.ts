@@ -12,10 +12,6 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please provide your name'],
     trim: true,
   },
-  lastname: {
-    type: String,
-    // required: [true, 'Please provider your username'],
-  },
   role: {
     type: String,
     enum: ['user', 'client', 'vendor', 'admin'],
@@ -32,6 +28,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minLength: 8,
+  },
+  passwordConfirm: {
+    // works only in create and save
+    // does not work in findOneAndUpdate
+    type: String,
+    required: true,
+    minLength: 8,
+    validate: {
+      validator(field: any) { return field === this.password },
+      message: 'Password does not match',
+    },
   },
   token: String,
   // tokens: {

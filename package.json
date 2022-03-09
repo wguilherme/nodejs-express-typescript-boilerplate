@@ -39,7 +39,7 @@
     "multer": "^1.4.3",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6",
-    "validator": "^13.6.0",
+    "validator": "^13.7.0",
     "xss": "^1.0.9"
   },
   "devDependencies": {
