@@ -25,8 +25,11 @@ const userController = {
 
   async create(req, res) {
     try {
+      console.log('api', req.body)
       const user: any = await User.create(req.body)
       await user.generateAuthToken()
+
+      await user.save()
 
       res.status(200).json({ status: 'success', message: 'User created', user })
     } catch (error) {

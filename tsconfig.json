@@ -37,6 +37,10 @@
   },
   "include": [
     "src/**/*",
-    "src/config/testSetup/.setupMongoMemoryTest.ts"
-, "src/tests/.user.ts", "src/tests/.item.ts", "src/tests/.auth.ts", "src/tests/api.test.ts"  ]
+    "src/config/testSetup/.setupMongoMemoryTest.ts",
+    "src/tests/.user.ts",
+    "src/tests/.item.ts",
+    "src/tests/.auth.ts",
+    "src/tests/api.test.ts"
+  ]
 }

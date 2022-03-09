@@ -3,8 +3,13 @@ import mongoose from 'mongoose'
 import validator from 'validator'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+// import uniqueValidator from 'mongoose-unique-validator'
 
 // export interface
+
+// export interface IUser extends mongoose.Document {
+//   [key: string]: any
+// }
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -16,6 +21,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['user', 'client', 'vendor', 'admin'],
     required: [true, 'Please provider your userRole'],
+    default: 'user',
   },
   email: {
     type: String,
@@ -26,24 +32,23 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: [true, 'Please provide your password'],
     minLength: 8,
   },
   passwordConfirm: {
+    type: String,
+    minLength: 8,
     // works only in create and save
     // does not work in findOneAndUpdate
-    type: String,
-    required: true,
-    minLength: 8,
-    validate: {
-      validator(field: any) { return field === this.password },
-      message: 'Password does not match',
-    },
+    // required: true,
+    validate: [
+      {
+        validator(field: any) { return field === this.password },
+        message: 'Password does not match',
+      },
+    ],
   },
   token: String,
-  // tokens: {
-  //   type: Array,
-  // },
 },
   {
     timestamps: true,
@@ -51,11 +56,10 @@ const userSchema = new mongoose.Schema({
 // userSchema.plugin(uniqueValidator)
 
 userSchema.pre('save', async function (next) {
-  // Hash the password before saving the user model
   const user: any = this
-  if (user.isModified('password')) {
-    user.password = await bcrypt.hash(user.password, 8)
-  }
+  if (!user?.isModified('password')) return next()
+  user.password = await bcrypt.hash(user.password, 12)
+  user.passwordConfirm = undefined
   next()
 })
 

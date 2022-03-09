@@ -13,7 +13,13 @@ const api = request(app)
 
 describe('user register and authentication', () => {
   it('should register a new user', async () => {
-    const registerUser = await api.post('/user').send(users[0])
+    const registerUser = await api.post('/user').send({
+      name: 'fulano',
+      email: 'app@app.com',
+      passwordConfirm: '12345678',
+      password: '12345678',
+    })
+    console.log(registerUser.text)
     expect(registerUser.status).toEqual(200)
   })
   it('should list all users', async () => {
@@ -21,7 +27,7 @@ describe('user register and authentication', () => {
     expect(listUsers.status).toEqual(200)
     // users[0].id = listUsers.body[0]._id
   })
-  it('should show user with correct data', async () => {
+  // it('should show user with correct data', async () => {
 
-  })
+  // })
 })
