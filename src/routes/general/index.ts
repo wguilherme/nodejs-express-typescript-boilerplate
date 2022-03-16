@@ -3,7 +3,7 @@ import General from '../../controllers/general'
 
 const router = express.Router()
 
-router.get('/', General.index)
+router.get('/api/v1/', General.index)
 
 /**
  * @swagger
@@ -16,7 +16,7 @@ router.get('/', General.index)
  *      200:
  *        description: Returns a {message:"pong"}
  */
-router.get('/ping', General.ping)
+router.get('/api/v1/ping', General.ping)
 
 // dev only routes
 if (process.env.DEV === 'true') {

@@ -17,7 +17,7 @@ const router = express.Router()
  *        200:
  *         description: Retorna um array
  */
-router.get('/item', Item.index)
+router.get('/api/v1/item', Item.index)
 
 /**
  * @swagger
@@ -31,7 +31,7 @@ router.get('/item', Item.index)
  *      200:
  *        description: Retorna um objeto
  */
-router.get('/item/:id', Item.show)
+router.get('/api/v1/item/:id', Item.show)
 
 /**
  * @swagger
@@ -43,7 +43,7 @@ router.get('/item/:id', Item.show)
  *      - Item
 */
 
-router.post('/item', Item.create)
+router.post('/api/v1/item', Item.create)
 
 /**
  * @swagger
@@ -56,7 +56,7 @@ router.post('/item', Item.create)
  *      200:
  *        description:  name, description e id do item na URL
  */
-router.patch('/item/:id', Item.update)
+router.patch('/api/v1/item/:id', Item.update)
 
 /**
  * @swagger
@@ -69,7 +69,7 @@ router.patch('/item/:id', Item.update)
  *       200:
  *         description: Returns code 200
  */
-router.delete('/item/:id', Item.deleteItem)
+router.delete('/api/v1/item/:id', Item.deleteItem)
 
 /**
  * @swagger
@@ -98,6 +98,6 @@ router.delete('/item/:id', Item.deleteItem)
  *                         description: The user's name.
  *                         example: Leanne Graham
  */
-router.delete('/deleteAllItems', Item.deleteAll)
+router.delete('/api/v1/deleteAllItems', Item.deleteAll)
 
 export default router

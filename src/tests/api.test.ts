@@ -1,33 +1,38 @@
 /* eslint-disable max-len */
 import request from 'supertest'
-import setupMongoMemory from '../config/testSetup/setupMongoMemoryTest'
 import app from '../app'
-
+import setupMongoMemory from '../config/testSetup/setupMongoMemoryTest'
+import baseUrl from './config'
 import { users } from './fixtures/data.json'
 
-setupMongoMemory()
-
 const api = request(app)
-
-// user and authentication
+setupMongoMemory()
 
 describe('user register and authentication', () => {
   it('should register a new user', async () => {
-    const registerUser = await api.post('/user').send({
-      name: 'fulano',
-      email: 'app@app.com',
-      passwordConfirm: '12345678',
-      password: '12345678',
+    const registerUser = await api.post(`${baseUrl}/user`).send({
+      name: users[0].name,
+      email: users[0].email,
+      role: users[0].role,
+      passwordConfirm: users[0].password,
+      password: users[0].password,
     })
-    console.log(registerUser.text)
+
     expect(registerUser.status).toEqual(200)
+    expect(registerUser.body.data.token).toBeTruthy()
+
+    users[0].token = registerUser.body.data.token
   })
   it('should list all users', async () => {
-    const listUsers = await api.get('/user')
+    const listUsers = await api.get(`${baseUrl}/user`)
     expect(listUsers.status).toEqual(200)
-    // users[0].id = listUsers.body[0]._id
   })
-  // it('should show user with correct data', async () => {
-
-  // })
+  it('should get logged user with token', async () => {
+    const getLoggedUser = await api.get(`${baseUrl}/user/me/auth`).set('Authorization', `Bearer ${users[0].token}`)
+    expect(getLoggedUser.status).toEqual(200)
+    expect(getLoggedUser.body.data.name).toEqual(users[0].name)
+    expect(getLoggedUser.body.data.token).toEqual(users[0].token)
+    expect(getLoggedUser.body.data.passwordConfirm).toEqual(undefined)
+    expect(getLoggedUser.body.data.password !== users[0].password).toBe(true)
+  })
 })

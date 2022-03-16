@@ -6,7 +6,8 @@
       "password": "12345678",
       "passwordConfirm": "12345678",
       "role": "user",
-      "id": null
+      "id": null,
+      "token": null
     },
     {
       "name": "User two",
@@ -14,7 +15,8 @@
       "password": "12345678",
       "passwordConfirm": "12345678",
       "role": "user",
-      "id": null
+      "id": null,
+      "token": null
     }
   ]
 }
