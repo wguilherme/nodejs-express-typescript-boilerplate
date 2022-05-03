@@ -8,7 +8,6 @@
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
     "postinstall": "yarn build",
-    "prepare": "husky install",
     "dev": "ts-node-dev --respawn --clear --transpile-only --ignore-watch node_modules src/server.ts",
     "dev-debug": "ts-node-dev --debug --respawn --transpile-only --ignore-watch node_modules src/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
@@ -64,7 +63,7 @@
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.24.2",
-    "husky": "^7.0.2",
+
     "jest": "^27.2.4",
     "mongodb-memory-server": "^8.4.0",
     "supertest": "^6.2.2",
