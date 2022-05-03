@@ -1,16 +1,13 @@
-import express from 'express'
 import cors from 'cors'
-import morgan from 'morgan'
-import helmet from 'helmet'
-import rateLimit from 'express-rate-limit'
 import dotenv from 'dotenv'
-
-import swaggerUi from 'swagger-ui-express'
+import express from 'express'
+import rateLimit from 'express-rate-limit'
+import helmet from 'helmet'
+import morgan from 'morgan'
 import swaggerJsDoc from 'swagger-jsdoc'
-import swaggerDocument from './config/swagger/swagger.json'
+import swaggerUi from 'swagger-ui-express'
 import routes from './router'
 
-// import { adminJs, adminJsRouter } from "./config/adminjs"
 
 dotenv.config()
 
@@ -61,13 +58,8 @@ const swaggerDocs = swaggerJsDoc(swaggerJsDocOptions)
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs, swaggerOptions))
 
-// applying into all requests
 app.use(limiter)
 
 app.use(routes)
 
-// setup adminjs connection
-// app.use(adminJs?.options?.rootPath, adminJsRouter)
-
-// routes
 export default app

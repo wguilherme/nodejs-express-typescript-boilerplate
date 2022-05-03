@@ -18,13 +18,10 @@
     "mongo-docker": "sudo docker run -p 27017:27017 -v ${PWD}/localdb/mongo:/data/db mongo"
   },
   "dependencies": {
-    "@adminjs/express": "^4.0.0",
-    "@adminjs/mongoose": "^2.0.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/mongoose-unique-validator": "^1.0.5",
     "@types/swagger-jsdoc": "^6.0.1",
     "@types/swagger-ui-express": "^4.1.3",
-    "adminjs": "^5.7.3",
     "aws-sdk": "^2.1090.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
